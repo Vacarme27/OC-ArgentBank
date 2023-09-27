@@ -4,6 +4,7 @@ import Footer from './components/footer/footer';
 import Header from './components/header/header';
 import SignIN from './view/sign-in/sign-in';
 import User from './view/user/user'
+import ErrorPage from './view/errorPage/errorPage';
 import './app.scss';
 
 
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<HomePage/>}/>
         <Route path='/sign-in' element={<SignIN/>}/>
         <Route path='/user' element={<User/>}/>
+        <Route path='*' element={<ErrorPage/>}/>
       </Routes>
       <Footer/>
     </BrowserRouter>

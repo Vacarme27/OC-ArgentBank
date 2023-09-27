@@ -1,11 +1,12 @@
 import './user.scss';
+import Button from '../../components/button/button';
+import EditName from '../../components/editName/editName';
 
 function User(){
     return (
         <main className="main bg-dark">
             <div className="header">
-                <h1>Welcome back<br />Tony Jarvis!</h1>
-                <button className="edit-button">Edit Name</button>
+                <EditName/>
             </div>
             <h2 className="sr-only">Accounts</h2>
             <section className="account">
@@ -15,7 +16,7 @@ function User(){
                     <p className="account-amount-description">Available Balance</p>
                 </div>
                 <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
+                    <Button className="transaction-button" text="View transactions"/>
                 </div>
             </section>
             <section className="account">
@@ -25,7 +26,7 @@ function User(){
                     <p className="account-amount-description">Available Balance</p>
                 </div>
                 <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
+                    <Button className="transaction-button" text="View transactions"/>
                 </div>
             </section>
             <section className="account">
@@ -35,7 +36,7 @@ function User(){
                     <p className="account-amount-description">Current Balance</p>
                 </div>
                 <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
+                    <Button className="transaction-button" text="View transactions"/>
                 </div>
             </section>
         </main>
