@@ -2,8 +2,9 @@ import { useState } from 'react';
 import './sign-in.scss';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { authSuccess, authRejected} from '../../redux/Slices/authSlice';
+import { authSuccess } from '../../redux/Slices/authSlice';
 import { useNavigate } from "react-router-dom";
+import CreateAccount from '../../components/createDossier/createAccount';
 
 function SignIn (){
     const initialState = {
@@ -12,6 +13,7 @@ function SignIn (){
     }
     const [data, setData] = useState(initialState);
     const [rememberMe, setRememberMe] = useState(false);
+    const [isError, setIsError] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();    
     const handleSubmit = e => {
@@ -21,22 +23,30 @@ function SignIn (){
             url: 'http://localhost:3001/api/v1/user/login',
             data: data
         })
-            .then( res => {
-                console.log(res.data.body.token);
-                dispatch(authSuccess(res.data.body.token));
-                localStorage.setItem("token", res.data.body.token);
-                navigate(`/user`)
+            .then( res => {                
+                dispatch(authSuccess(res.data.body.token));                
                 if (rememberMe) {
                     localStorage.setItem("token", res.data.body.token);
-                  }          
+                  }
+                navigate(`/user`);  
+                setData(initialState);          
               })
-            .catch( (err) => {                
-              dispatch(authRejected(err));
+              .catch(() => {
+                setIsError(true);
+                setData(initialState);            
             });
     }
     const handleRememberMeChange = (e) => {
         setRememberMe(e.target.checked);
       };
+      const handleInfoChange = (e, info) => {
+        setIsError(false);
+        if (info === 'email'){
+            setData({...data, email: e.target.value})
+        } else {
+            setData({...data, password: e.target.value})
+        }
+    }
     return (
         <main className="main bg-dark">
             <section className="sign-in-content">
@@ -45,11 +55,11 @@ function SignIn (){
                 <form onSubmit={handleSubmit}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
-                        <input type="text" id="username" value={data.email} onChange={e => setData({...data, email: e.target.value})} required/>
+                        <input type="text" id="username"value={data.email} onChange={e => handleInfoChange(e, 'email') } required/>
                     </div>
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>
-                        <input type="password" id="password" value={data.password} onChange={e => setData({...data, password: e.target.value})} required/>
+                        <input type="password" id="password"value={data.password} onChange={e => handleInfoChange(e, 'password')} required/>
                     </div>
                     <div className="input-remember">
                         <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMeChange}/>
@@ -57,8 +67,10 @@ function SignIn (){
                             Remember me
                         </label>
                     </div>            
-                    <button className="sign-in-button">Sign In</button>            
+                    <button className="sign-in-button">Sign In</button>
+                    <CreateAccount/>          
                 </form>
+                {isError && <p className="error-message">Mauvais e-mail ou mot de passe</p>}
             </section>
         </main>
     )
