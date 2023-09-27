@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import './sign-in.scss';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
+import { authSuccess, authRejected} from '../../redux/Slices/authSlice';
 
 function SignIn (){
     const initialState = {
@@ -7,8 +10,23 @@ function SignIn (){
         password:''
     }
     const [data, setData] = useState(initialState);
+    const dispatch = useDispatch();
     const handleSubmit = e => {
         e.preventDefault();
+        console.log(data)
+        axios({
+            method: 'post',
+            url: 'http://localhost:3001/api/v1/user/login',
+            data: data
+        })
+            .then( res => {
+                dispatch(authSuccess(res.data.body.token));
+                localStorage.setItem("token", res.data.body.token);
+              })
+            .catch( (err) => {
+                console.log(err)
+              dispatch(authRejected(err));
+            });
     }
     return (
         <main className="main bg-dark">
