@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import HomePage from './view/homepage/Homepage';
 import Footer from './components/footer/footer';
 import Header from './components/header/header';
-import SignIN from './view/sign-in/sign-in';
+import Sign from './view/sign/sign';
 import User from './view/user/user'
 import ErrorPage from './view/errorPage/errorPage';
 import './app.scss';
@@ -14,7 +14,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<HomePage/>}/>
-        <Route path='/sign-in' element={<SignIN/>}/>
+        <Route path='/sign' element={<Sign/>}/>
         <Route path='/user' element={<User/>}/>
         <Route path='*' element={<ErrorPage/>}/>
       </Routes>
