@@ -14,22 +14,21 @@ function EditName() {
   const userProfile = useSelector((state) => state.user);
   const [isEditMode, setEditMode] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  useEffect(() => {
-    if (token) {
-      axios("http://localhost:3001/api/v1/user/profile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },        
+  useEffect(() => {    
+    axios("http://localhost:3001/api/v1/user/profile", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },        
+    })
+      .then((res) => {
+        dispatch(setProfile(res.data.body));
       })
-        .then((res) => {
-          dispatch(setProfile(res.data.body));
-        })
-        .catch((err) => {
-          setErrorMessage(err.response.data.message);
-        });
-    }
+      .catch((err) => {
+        setErrorMessage(err.response.data.message);
+      });
+          
   }, [token, dispatch]);
   const handleEditClick = () => {
     setEditMode(true);

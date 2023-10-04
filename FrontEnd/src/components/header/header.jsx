@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
     const dispatch = useDispatch();        
-    const connectedOrNot = useSelector((state) => state.auth.isAuth);
+    const connectedOrNot = useSelector((state) => state.auth.token);
     const handleLogOut = () => {
         dispatch(authOut());
     };
