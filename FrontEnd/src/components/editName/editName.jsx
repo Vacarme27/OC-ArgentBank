@@ -4,6 +4,7 @@ import { setUserName, setProfile } from "../../redux/Slices/userSlice";
 import "./editName.scss";
 import Button from "../button/button";
 import axios from "axios";
+import Alert from "../alert/alert";
 
 function EditName() {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ function EditName() {
   const [editUserName, setEditUserName] = useState(useSelector((state) => state.user.userName));  
   const userProfile = useSelector((state) => state.user);
   const [isEditMode, setEditMode] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     if (token) {
       axios("http://localhost:3001/api/v1/user/profile", {
@@ -24,7 +26,7 @@ function EditName() {
           dispatch(setProfile(res.data.body));
         })
         .catch((err) => {
-          console.log(err)
+          setErrorMessage(err.response.data.message);
         });
     }
   }, [token, dispatch]);
@@ -51,7 +53,7 @@ function EditName() {
         setEditUserName(res.data.body.userName);
       })
       .catch((err) => {
-        console.log(err)
+        setErrorMessage(err.response.data.message);
       });
     setEditMode(false);
   };
@@ -83,6 +85,7 @@ function EditName() {
           </div>
         )}
       </div>
+      {errorMessage && <Alert alert={errorMessage}/>}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { authSuccess } from '../../redux/Slices/authSlice';
 import { useNavigate } from "react-router-dom";
+import Alert from '../../components/alert/alert';
 
 function Sign (){
     const signInState = {
@@ -19,8 +20,7 @@ function Sign (){
     }
     const [dataSignIn, setDataSignIn] = useState(signInState);
     const [dataSignUp, setDataSignUp] = useState(useSelector(state => state.user));
-    const [rememberMe, setRememberMe] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);    
     const [errorMessage, setErrorMessage] = useState("");
     const [inputSignUp, setInputSignUp] = useState(false);
     const clickSignUp = () => {
@@ -48,10 +48,9 @@ function Sign (){
                 navigate(`/user`);  
                 setDataSignIn(signInState);
               })
-            .catch((err) => {
-              setIsError(true);
+            .catch((err) => {              
               setDataSignIn(signInState);
-              setErrorMessage(err.message);
+              setErrorMessage(err.response.data.message);
             });
     }
     const handleSubmitSignUp = e => {
@@ -66,18 +65,16 @@ function Sign (){
                 setDataSignIn(signInState);
                 setDataSignUp(signUpState);
               })
-            .catch((err) => {
-              setIsError(true);
+            .catch((err) => {              
               setDataSignUp(signUpState);
               setDataSignIn(signInState);
-              setErrorMessage(err.message);
+              setErrorMessage(err.response.data.message);              
             });
     }
     const handleRememberMeChange = e => {
         setRememberMe(e.target.checked);
       };
-    const handleInfoChange = (e, info) => {
-        setIsError(false);
+    const handleInfoChange = (e, info) => {        
         setErrorMessage("");
         if (info === 'email'){
             setDataSignIn({...dataSignIn, email: e.target.value});
@@ -150,7 +147,7 @@ function Sign (){
                     <div onClick={clickSignUp} className={divSignUpAppear}>Sign Up</div>
                     <button className={buttonSignUpAppear}>Sign Up</button> 
                 </form>
-                {isError && <p className="error-message">{errorMessage}</p>}
+                {errorMessage && <Alert alert={errorMessage}/>}
             </section>
         </main>
     )
