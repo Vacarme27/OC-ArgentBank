@@ -1,14 +1,14 @@
 import argentBankLogo from '../../assets/img/argentBankLogo.png';
 import './header.scss';
 import { Link } from 'react-router-dom';
-import { authOutSuccess } from "../../redux/Slices/authSlice";
+import { authOut } from "../../redux/Slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 function Header() {
     const dispatch = useDispatch();        
     const connectedOrNot = useSelector((state) => state.auth.isAuth);
     const handleLogOut = () => {
-        dispatch(authOutSuccess());
+        dispatch(authOut());
     };
     return (
         <nav className="main-nav">
@@ -22,10 +22,13 @@ function Header() {
                 </Link>
                 <div>
                     {  connectedOrNot ? 
-                        <Link to="/sign" className="link_SignOut" onClick={handleLogOut}>
-                        <i className="fa-solid fa-right-from-bracket"></i>
-                            Sign Out
-                        </Link>
+                        <>
+                        <Link to="/user">User Space</Link>
+                            <Link to="/sign" className="link_SignOut" onClick={handleLogOut}>
+                                <i className="fa-solid fa-right-from-bracket"></i>
+                                Sign Out
+                            </Link>
+                        </>
                         :
                         <Link className="main-nav-item" to="/sign">
                             <i className="fa fa-user-circle"></i>
