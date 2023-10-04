@@ -1,6 +1,6 @@
 import './sign.scss';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { authSuccess } from '../../redux/Slices/authSlice';
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ function Sign (){
         userName: ''
     }
     const [dataSignIn, setDataSignIn] = useState(signInState);
-    const [dataSignUp, setDataSignUp] = useState(signUpState);
+    const [dataSignUp, setDataSignUp] = useState(useSelector(state => state.user));
     const [rememberMe, setRememberMe] = useState(false);
     const [isError, setIsError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -41,8 +41,9 @@ function Sign (){
         })
             .then( res => {
                 dispatch(authSuccess(res.data.body.token));
+                localStorage.setItem("token", res.data.body.token);
                 if (rememberMe) {
-                    localStorage.setItem("token", res.data.body.token);
+                    sessionStorage.setItem("token", res.data.body.token);
                   }  
                 navigate(`/user`);  
                 setDataSignIn(signInState);

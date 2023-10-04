@@ -4,7 +4,8 @@ const initialState = {
   firstName: "",
   lastName: "",
   userName: "", 
-  email: ""
+  email: "",
+  password: ""
 }
 
 const userSlice = createSlice({
@@ -16,8 +17,7 @@ const userSlice = createSlice({
     },
     setProfile: (state, action) => {
       state.firstName = action.payload.firstName;
-      state.lastName = action.payload.lastName;
-      state.userName = action.payload.userName;
+      state.lastName = action.payload.lastName;      
       state.email = action.payload.email;
     },    
   },

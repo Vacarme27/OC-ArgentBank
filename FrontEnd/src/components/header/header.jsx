@@ -1,6 +1,6 @@
 import argentBankLogo from '../../assets/img/argentBankLogo.png';
 import './header.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { authOut } from "../../redux/Slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,6 +10,15 @@ function Header() {
     const handleLogOut = () => {
         dispatch(authOut());
     };
+    const location = useLocation();
+    const userSpace = location => {
+        console.log(location.pathname)
+        if( location.pathname === "/user"){
+            return
+        } else {
+            return <Link to="/user">User Space</Link>
+        }
+    }
     return (
         <nav className="main-nav">
             <Link className="main-nav-logo" to="/">
@@ -22,8 +31,8 @@ function Header() {
                 </Link>
                 <div>
                     {  connectedOrNot ? 
-                        <>
-                        <Link to="/user">User Space</Link>
+                        <>                        
+                        {userSpace(location)}
                             <Link to="/sign" className="link_SignOut" onClick={handleLogOut}>
                                 <i className="fa-solid fa-right-from-bracket"></i>
                                 Sign Out
