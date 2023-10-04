@@ -9,8 +9,7 @@ import Alert from "../alert/alert";
 function EditName() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
-  const [editUserName, setEditUserName] = useState(useSelector((state) => state.user.userName));
-  const placeHolderUser = useSelector((state) => state.user.userName)  
+  const [editUserName, setEditUserName] = useState("");  
   const userProfile = useSelector((state) => state.user);
   const [isEditMode, setEditMode] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,7 +27,7 @@ function EditName() {
       .catch((err) => {
         setErrorMessage(err.response.data.message);
       });
-          
+
   }, [token, dispatch]);
   const handleEditClick = () => {
     setEditMode(true);
@@ -62,6 +61,7 @@ function EditName() {
       <div className="user_welcome">
         <h1>
           Welcome back <br />
+          {userProfile && `${userProfile.firstName} ${userProfile.lastName} !`}
           {isEditMode ? (
             <form className="input_editName">
               <input
@@ -69,14 +69,12 @@ function EditName() {
                 type="text"                
                 required
                 minLength={5}
-                placeholder={`Your last username: ${placeHolderUser}`}
+                placeholder={`Your last username: ${userProfile.userName}`}
                 onChange={(e) => setEditUserName(e.target.value)}
               />
                <Button text="Save" className="edit-button" onClick={handleSaveClick} />
             </form>
-          ) : (
-            userProfile && `${userProfile.firstName} ${userProfile.lastName} !`
-          )}
+          ) : (<></>)}
         </h1>
         {isEditMode ? (
             <Button text="Cancel" className="edit-button" onClick={handleCancelClick} />
