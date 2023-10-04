@@ -139,7 +139,7 @@ function Sign (){
                         <label htmlFor="lastname">LastName</label>
                         <input type="text" id="lastname"value={dataSignUp.lastName} onChange={e => handleInfoChange(e, 'lastName')} required/>
                     </div>
-                    <div className="input-wrapper">
+                    <div className="input-remember">
                         <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMeChange}/>
                         <label htmlFor="remember-me">
                             Remember me
