@@ -11,8 +11,7 @@ function Header() {
         dispatch(authOut());
     };
     const location = useLocation();
-    const userSpace = location => {
-        console.log(location.pathname)
+    const userSpace = location => {        
         if( location.pathname === "/user"){
             return
         } else {
