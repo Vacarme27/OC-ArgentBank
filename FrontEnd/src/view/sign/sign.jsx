@@ -1,5 +1,5 @@
 import './sign.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { authSuccess } from '../../redux/Slices/authSlice';
@@ -89,8 +89,14 @@ function Sign (){
         } else {
             setDataSignUp({...dataSignUp, lastName: e.target.value});
         }
-
     }
+    const navigateToUser = useNavigate();
+    const token = useSelector((state) => state.auth.isAuth);
+    useEffect(() => {
+        if(token){
+            navigateToUser('/user')
+        }
+    })
     return (
         <main className="main bg-dark">
             <section className="sign-in-content">

@@ -65,7 +65,7 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-       parameters:
+      parameters:
         - in: header
           name: Authorization
           type: string
@@ -112,8 +112,8 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-/user/accounts:
-    get:
+  /user/accounts:
+    post:
       security:
         - Bearer: []
       tags:
@@ -147,7 +147,7 @@ paths:
         '500':
           description: Internal Server Error
   /user/accounts/{accountId}:
-    get:
+    post:
       security:
         - Bearer: []
       tags:
@@ -155,7 +155,7 @@ paths:
       summary: User accounts API
       description: API for fetching an user's specified account data
       parameters:
-        - in: path
+        - in: body
           name: accountId
           description: ID of the selected account
           required: true
@@ -184,7 +184,7 @@ paths:
         '500':
           description: Internal Server Error
   /user/accounts/{accountId}/transactions:
-    get:
+    post:
       security:
         - Bearer: []
       tags:
@@ -192,7 +192,7 @@ paths:
       summary: User accounts API
       description: API for fetching all transactions (current year) or the ones of the specified month from an user's specified account
       parameters:
-        - in: path
+        - in: body
           name: accountId
           description: ID of the selected account
           required: true
@@ -228,7 +228,7 @@ paths:
         '500':
           description: Internal Server Error
   /user/accounts/{accountId}/transactions/{transactionId}:
-    get:
+    post:
       security:
         - Bearer: []
       tags:
@@ -236,12 +236,12 @@ paths:
       summary: User accounts API
       description: API for fetching a specified transaction from an user's specified account
       parameters:
-        - in: path
+        - in: body
           name: accountId
           description: ID of the selected account
           required: true
           type: string
-        - in: path
+        - in: body
           name: transactionId
           description: ID of the selected transaction
           required: true
@@ -277,12 +277,12 @@ paths:
       summary: User accounts API
       description: API for updating the category and notes of the specified transaction
       parameters:
-        - in: path
+        - in: body
           name: accountId
           description: ID of the selected account
           required: true
           type: string
-        - in: path
+        - in: body
           name: transactionId
           description: ID of the selected transaction
           required: true
@@ -315,7 +315,7 @@ paths:
         '400':
           description: Invalid Fields
         '500':
-          description: Internal Server Error         
+          description: Internal Server Error
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -365,9 +365,7 @@ definitions:
             type: string
           lastName:
             type: string
-          createdAt:
-            type: string
-          updatedAt:
+          username: 
             type: string
   LoginResponse:
     type: object
@@ -377,9 +375,7 @@ definitions:
   UserProfile:
     type: object
     properties:
-      firstName:
-        type: string
-      lastName:
+      userName:
         type: string
   AccountModel:
     type: object
