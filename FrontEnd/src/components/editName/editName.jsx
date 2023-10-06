@@ -33,6 +33,9 @@ function EditName() {
     setEditMode(true);
   };
   console.log(editUserName)
+  console.log(JSON.stringify({
+    userName: editUserName        
+  }))
   const handleCancelClick = () => {
     setEditMode(false);
   };  
@@ -40,13 +43,14 @@ function EditName() {
     axios(`http://localhost:3001/api/v1/user/profile`, {
       method: "PUT",
       headers: {
+        accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body : JSON.stringify({
-        userName: editUserName
+      data : JSON.stringify({
+        "userName": editUserName
       }),
-    })
+    })    
       .then((res) => {        
         dispatch(setUserName(res.data.body.userName));
         setEditUserName(res.data.body.userName);
