@@ -79,7 +79,7 @@ paths:
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
-          description: Invalid Fields
+          description: Bad Request
         '500':
           description: Internal Server Error
     put:
@@ -112,13 +112,13 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/accounts:
-    post:
+  /accounts:
+    get:
       security:
         - Bearer: []
       tags:
         - Accounts Module
-      summary: User accounts API
+      summary: Accounts list of authentified user
       description: API for fetching an user's accounts list
       parameters:
         - in: header
@@ -143,19 +143,19 @@ paths:
                 items:
                   $ref: '#/definitions/AccountModel'
         '400':
-          description: Invalid Field
+          description: Bad Request
         '500':
           description: Internal Server Error
-  /user/accounts/{accountId}:
-    post:
+  /accounts/{accountId}:
+    get:
       security:
         - Bearer: []
       tags:
         - Accounts Module
-      summary: User accounts API
+      summary: Specified account of authentified user
       description: API for fetching an user's specified account data
       parameters:
-        - in: body
+        - in: path
           name: accountId
           description: ID of the selected account
           required: true
@@ -183,25 +183,20 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/accounts/{accountId}/transactions:
-    post:
+  /accounts/{accountId}/transactions:
+    get:
       security:
         - Bearer: []
       tags:
         - Accounts Module
-      summary: User accounts API
-      description: API for fetching all transactions (current year) or the ones of the specified month from an user's specified account
+      summary: List of transactions for specified account of authentified user
+      description: API for fetching all transactions from an user's specified account
       parameters:
-        - in: body
+        - in: path
           name: accountId
           description: ID of the selected account
           required: true
           type: string
-        - in: query
-          name: month
-          description: Integer of the specified month from 0 (January) to 11 (December) 
-          required: false
-          type: integer
         - in: header
           name: Authorization
           type: string
@@ -224,24 +219,24 @@ paths:
                 items:
                   $ref: '#/definitions/TransactionModel'
         '400':
-          description: Invalid Fields
+          description: Bad Request
         '500':
           description: Internal Server Error
-  /user/accounts/{accountId}/transactions/{transactionId}:
-    post:
+  /accounts/{accountId}/transactions/{transactionId}:
+    get:
       security:
         - Bearer: []
       tags:
         - Accounts Module
-      summary: User accounts API
+      summary: Specified transaction for specified account of authentified user
       description: API for fetching a specified transaction from an user's specified account
       parameters:
-        - in: body
+        - in: path
           name: accountId
           description: ID of the selected account
           required: true
           type: string
-        - in: body
+        - in: path
           name: transactionId
           description: ID of the selected transaction
           required: true
@@ -266,7 +261,7 @@ paths:
               body:
                 $ref: '#/definitions/TransactionModel'
         '400':
-          description: Invalid Fields
+          description: Bad Request
         '500':
           description: Internal Server Error
     put:
@@ -274,15 +269,15 @@ paths:
         - Bearer: []
       tags:
         - Accounts Module
-      summary: User accounts API
+      summary: Modify specified transaction for specified account of authentified user
       description: API for updating the category and notes of the specified transaction
       parameters:
-        - in: body
+        - in: path
           name: accountId
           description: ID of the selected account
           required: true
           type: string
-        - in: body
+        - in: path
           name: transactionId
           description: ID of the selected transaction
           required: true
@@ -313,7 +308,7 @@ paths:
               body:
                 $ref: '#/definitions/TransactionModel'
         '400':
-          description: Invalid Fields
+          description: Bad Request
         '500':
           description: Internal Server Error
 securityDefinitions:
