@@ -135,24 +135,24 @@ function Sign() {
           style={{ display: showSignInForm ? 'none' : '' }}
         >
           <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" value={dataSignUp.email} onChange={(e) => handleInfoChange(e, 'email')} minLength={5} required />
+            <label htmlFor="firstname">First Name</label>
+            <input type="text" id="firstname" value={dataSignUp.firstName} onChange={(e) => handleInfoChange(e, 'firstName')} minLength={5} required />
+          </div>
+          <div className="input-wrapper">
+            <label htmlFor="lastname">Last Name</label>
+            <input type="text" id="lastname" value={dataSignUp.lastName} onChange={(e) => handleInfoChange(e, 'lastName')} minLength={5} required />
           </div>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
             <input type="text" id="username" value={dataSignUp.userName} onChange={(e) => handleInfoChange(e, 'userName')} minLength={5} required />
           </div>
           <div className="input-wrapper">
+            <label htmlFor="email">Email</label>
+            <input type="email" id="email" value={dataSignUp.email} onChange={(e) => handleInfoChange(e, 'email')} minLength={5} required />
+          </div>
+          <div className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input type="password" id="password" value={dataSignUp.password} onChange={(e) => handleInfoChange(e, 'password')} minLength={10} required />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="firstname">FirstName</label>
-            <input type="text" id="firstname" value={dataSignUp.firstName} onChange={(e) => handleInfoChange(e, 'firstName')} minLength={5} required />
-          </div>
-          <div className="input-wrapper">
-            <label htmlFor="lastname">LastName</label>
-            <input type="text" id="lastname" value={dataSignUp.lastName} onChange={(e) => handleInfoChange(e, 'lastName')} minLength={5} required />
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" checked={rememberMe} onChange={handleRememberMeChange} />
