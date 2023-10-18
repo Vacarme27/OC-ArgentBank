@@ -41,7 +41,7 @@
             }
           },
           "400": {
-            "description": "Invalid Fields"
+            "description": "Invalid Login Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -78,7 +78,7 @@
             }
           },
           "400": {
-            "description": "Invalid Fields"
+            "description": "Invalid Signup Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -112,13 +112,13 @@
         ],
         "responses": {
           "200": {
-            "description": "User profile retrieved successully",
+            "description": "User profile retrieved successfully",
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid Profile Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -159,13 +159,13 @@
         ],
         "responses": {
           "200": {
-            "description": "User profile retrieved successully",
+            "description": "User profile retrieved successfully",
             "schema": {
               "$ref": "#/definitions/ApiResponse"
             }
           },
           "400": {
-            "description": "Invalid Fields"
+            "description": "Invalid Profile Update Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -183,8 +183,8 @@
         "tags": [
           "Accounts Module"
         ],
-        "summary": "Accounts list of authentified user",
-        "description": "API for fetching an user's accounts list",
+        "summary": "Accounts list of authenticated user",
+        "description": "API for fetching a user's accounts list",
         "parameters": [
           {
             "in": "header",
@@ -219,7 +219,7 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid Accounts Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -237,8 +237,8 @@
         "tags": [
           "Accounts Module"
         ],
-        "summary": "Specified account of authentified user",
-        "description": "API for fetching an user's specified account data",
+        "summary": "Specified account of authenticated user",
+        "description": "API for fetching a user's specified account data",
         "parameters": [
           {
             "in": "path",
@@ -277,7 +277,7 @@
             }
           },
           "400": {
-            "description": "Invalid Fields"
+            "description": "Invalid Account Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -295,14 +295,21 @@
         "tags": [
           "Accounts Module"
         ],
-        "summary": "List of transactions for specified account of authentified user",
-        "description": "API for fetching all transactions from an user's specified account",
+        "summary": "List of transactions for specified account of authenticated user",
+        "description": "API for fetching all transactions from a user's specified account",
         "parameters": [
           {
             "in": "path",
             "name": "accountId",
             "description": "ID of the selected account",
             "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "month",
+            "description": "Filter transactions by month (e.g., '2023-10')",
+            "required": false,
             "type": "string"
           },
           {
@@ -338,7 +345,7 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid Transactions Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -356,8 +363,8 @@
         "tags": [
           "Accounts Module"
         ],
-        "summary": "Specified transaction for specified account of authentified user",
-        "description": "API for fetching a specified transaction from an user's specified account",
+        "summary": "Specified transaction for specified account of authenticated user",
+        "description": "API for fetching a specified transaction from a user's specified account",
         "parameters": [
           {
             "in": "path",
@@ -403,7 +410,7 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid Transaction Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -419,7 +426,7 @@
         "tags": [
           "Accounts Module"
         ],
-        "summary": "Modify specified transaction for specified account of authentified user",
+        "summary": "Modify specified transaction for specified account of authenticated user",
         "description": "API for updating the category and notes of the specified transaction",
         "parameters": [
           {
@@ -475,7 +482,7 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid Transaction Update Request"
           },
           "500": {
             "description": "Internal Server Error"

@@ -7,8 +7,8 @@ function Alert({alert}) {
             </div>
 }
 
-export default Alert;
-
 Alert.propTypes = {
-    alert: PropTypes.object,
+    alert: PropTypes.string,
 };
+
+export default Alert;
