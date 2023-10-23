@@ -12,10 +12,10 @@ function Header() {
   };
   const location = useLocation();
   const userSpace = location => {        
-    if( location.pathname === "/user"){
+    if( location.pathname === "/profile"){
       return
     } else {
-      return <Link to="/user"><i className="fa fa-user-circle"></i>User Space</Link>
+      return <Link to="/profile"><i className="fa fa-user-circle"></i>User Space</Link>
     }
   }
   return (
@@ -32,13 +32,13 @@ function Header() {
           {  connectedOrNot ? 
             <>                        
             {userSpace(location)}
-              <Link to="/sign" className="link_SignOut" onClick={handleLogOut}>
+              <Link to="/login" className="link_SignOut" onClick={handleLogOut}>
                   <i className="fa-solid fa-right-from-bracket"></i>
                   Sign Out
               </Link>
             </>
             :
-            <Link className="main-nav-item" to="/sign">
+            <Link className="main-nav-item" to="/login">
               <i className="fa fa-user-circle"></i>
               Sign In
             </Link>

@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {    
-  token: sessionStorage.getItem("token") || localStorage.getItem("token")  
+  token: sessionStorage.getItem("token") || localStorage.getItem("token")
 };
 
 const authSlice = createSlice({
@@ -18,7 +18,7 @@ const authSlice = createSlice({
         state.token = null;
         localStorage.removeItem("token");
         sessionStorage.removeItem("token");
-    },    
+    },
   },
 });
 
