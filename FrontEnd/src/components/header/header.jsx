@@ -32,7 +32,7 @@ function Header() {
           {  connectedOrNot ? 
             <>                        
             {userSpace(location)}
-              <Link to="/login" className="link_SignOut" onClick={handleLogOut}>
+              <Link to="/" className="link_SignOut" onClick={handleLogOut}>
                   <i className="fa-solid fa-right-from-bracket"></i>
                   Sign Out
               </Link>
