@@ -1,4 +1,4 @@
-import argentBankLogo from '../../assets/img/argentBankLogo.png';
+import argentBankLogo from '../../assets/img/argentBankLogo.webp';
 import './header.scss';
 import { Link, useLocation } from 'react-router-dom';
 import { authOut } from "../../redux/Slices/authSlice";
