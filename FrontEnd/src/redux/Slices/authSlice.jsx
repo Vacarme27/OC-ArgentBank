@@ -9,15 +9,15 @@ const authSlice = createSlice({
   initialState: initialState,
   reducers: {    
     authSuccess: (state, action) => {        
-        state.token = action.payload;        
+      state.token = action.payload;
     },
     authRejected: state => {
-        state.token = null;        
+      state.token = null;
     },
     authOut: state => {
-        state.token = null;
-        localStorage.removeItem("token");
-        sessionStorage.removeItem("token");
+      state.token = null;
+      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
     },
   },
 });
