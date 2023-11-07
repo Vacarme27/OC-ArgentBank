@@ -23,7 +23,6 @@ function Sign() {
   const [rememberMe, setRememberMe] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [inputSignUp, setInputSignUp] = useState(false);
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -195,7 +194,7 @@ function Sign() {
               minLength={5}
               required
             />
-          </div>          
+          </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
             <input
@@ -206,7 +205,7 @@ function Sign() {
               minLength={10}
               required
             />
-          </div>                    
+          </div>
           <div className="input-remember">
             <input
               type="checkbox"
